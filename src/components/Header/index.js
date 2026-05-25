@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 
@@ -9,7 +9,6 @@ class Header extends Component {
     const {history} = this.props
 
     Cookies.remove('jwt_token')
-
     history.replace('/login')
   }
 
@@ -24,7 +23,11 @@ class Header extends Component {
               alt="website logo"
             />
 
-            <button type="button" className="nav-mobile-btn">
+            <button
+              type="button"
+              className="nav-mobile-btn"
+              onClick={this.logout}
+            >
               <img
                 src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-log-out-img.png"
                 alt="nav logout"
@@ -69,9 +72,43 @@ class Header extends Component {
             </button>
           </div>
         </div>
+
+        <div className="nav-menu-mobile">
+          <ul className="nav-menu-list-mobile">
+            <li className="nav-menu-item-mobile">
+              <Link to="/">
+                <img
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-home-icon.png"
+                  alt="nav home"
+                  className="nav-bar-img"
+                />
+              </Link>
+            </li>
+
+            <li className="nav-menu-item-mobile">
+              <Link to="/products">
+                <img
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-products-icon.png"
+                  alt="nav products"
+                  className="nav-bar-img"
+                />
+              </Link>
+            </li>
+
+            <li className="nav-menu-item-mobile">
+              <Link to="/cart">
+                <img
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-cart-icon.png"
+                  alt="nav cart"
+                  className="nav-bar-img"
+                />
+              </Link>
+            </li>
+          </ul>
+        </div>
       </nav>
     )
   }
 }
 
-export default Header
+export default withRouter(Header)
